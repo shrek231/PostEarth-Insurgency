@@ -65,7 +65,7 @@ public class InventoryDisplay : MonoBehaviour {
     }
     public void UpdateInv() {
         Sprite SelectedId = Empty;
-        switch (InvScript.InvArr[CurrentSlot,1]) {//add more cases for more items
+        switch (InvScript.InvArr[CurrentSlot,1]) {//TODO: add more cases for more items
             case (0):{
                 SelectedId = Empty;
                 break;

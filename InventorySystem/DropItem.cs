@@ -11,7 +11,7 @@ public class DropItem : MonoBehaviour {
     public void Drop() {
         int droped_item = inventory.InvArr[inventoryDisplay.CurrentSlot, 1];
         inventory.InvArr[inventoryDisplay.CurrentSlot, 1] = 0; //no item
-        switch (droped_item) {//add more cases for more items
+        switch (droped_item) {//TODO: add more cases for more items
             case (1): {
                 GameObject Droped_Item = Instantiate(ID_1, transform.position, Quaternion.identity);
                 Droped_Item.name = "id:1";
