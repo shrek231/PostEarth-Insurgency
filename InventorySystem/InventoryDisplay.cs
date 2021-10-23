@@ -27,8 +27,8 @@ public class InventoryDisplay : MonoBehaviour {
                 SlotBuffer[3] = 0;
                 SlotBuffer[InvCount] = 1;
                 CurrentSlot = InvCount;
-                //print(InvCount); //current selected slot
-                //print(InvScript.InvArr[InvCount,1]); //current selected item id
+                //print(CurrentSlot); //current selected slot
+                //print(InvScript.InvArr[CurrentSlot,1]); //current selected item id
                 Color c = slot1.color;
                 c.a = .5f;
                 slot1.color = c;
@@ -65,7 +65,7 @@ public class InventoryDisplay : MonoBehaviour {
     }
     public void UpdateInv() {
         Sprite SelectedId = Empty;
-        switch (InvScript.InvArr[CurrentSlot,1]) {
+        switch (InvScript.InvArr[CurrentSlot,1]) {//add more cases for more items
             case (0):{
                 SelectedId = Empty;
                 break;
