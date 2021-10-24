@@ -70,10 +70,10 @@ public class InventoryDisplay : MonoBehaviour {
                 SelectedId = Empty;
                 break;
             }case (1): {
-                SelectedId = ID1;
+                SelectedId = ID1;//key
                 break;
             }case (2): {
-                SelectedId = ID2;
+                SelectedId = ID2;//gun
                 break;
             }case (3): {
                 SelectedId = ID3;

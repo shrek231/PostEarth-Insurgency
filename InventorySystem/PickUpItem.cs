@@ -16,7 +16,7 @@ public class PickUpItem : MonoBehaviour {
         }
     }
     public void PickUp(Collider other) {
-        inventory.InvArr[inventoryDisplay.CurrentSlot, 1] = int.Parse(other.name.Split(':')[1]);
+        inventory.InvArr[inventoryDisplay.CurrentSlot, 1] = int.Parse(other.name.Split(':')[1]); //item must have the id as the name, example: id:2
         Destroy(other.gameObject);
     }
 }
