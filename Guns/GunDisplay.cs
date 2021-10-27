@@ -7,6 +7,6 @@ public class GunDisplay : MonoBehaviour {
     void Update() {
         string mags = (GunScript.ReserveMags - GunScript.CurrentReserveMagsUsed).ToString();
         string bullets = (GunScript.bulletsPerMag - GunScript.BulletsShot).ToString();
-        amoText.text = bullets + "/" + mags;
+        amoText.text = GunScript.GunName + "\n" + bullets + "/" + mags;
     }
 }

@@ -1,6 +1,8 @@
-using System;
 using UnityEngine;
 public class ShootingGun : MonoBehaviour {
+    public GunRecoil recoil = new GunRecoil();
+    public Controllers controllers = new Controllers();
+    
     public Inventory inventory = new Inventory();
     public InventoryDisplay inventoryDisplay = new InventoryDisplay();
     public float FireActivation = .1f;
@@ -19,6 +21,7 @@ public class ShootingGun : MonoBehaviour {
     public int FireRate;
     public int CurrentReserveMagsUsed;
     public int BulletsShot;
+    public string GunName;
     
     //TODO: add more for more guns
     public int[] SBV_28_Mags; //SBV_28_Mags[0] = Bullets Shot, SBV_28_Mags[1] Reserve Mags Used
@@ -61,6 +64,7 @@ public class ShootingGun : MonoBehaviour {
     public int SBV_28() {//TODO: add more functions for more guns
         CurrentReserveMagsUsed = SBV_28_Mags[1];
         BulletsShot = SBV_28_Mags[0];
+        GunName = "SBV-28";
         bulletsPerMag = 5;//how many bullets are in the mag
         ReserveMags = 5;//Reserve Mags
         max_distance = 20f;//max bullet distance
@@ -72,6 +76,7 @@ public class ShootingGun : MonoBehaviour {
             if (TimeBeforeShoot_Bullet >= FireRate){
                 TimeBeforeShoot_Bullet = 0;
                 if (SBV_28_Mags[0] < bulletsPerMag){
+                    //TODO: make the MiddleScreen have recoil
                     SBV_28_Mags[0]++;
                     RaycastHit hit;
                     int layerMask = 1 << 8;//This would cast rays only against colliders in layer 8
@@ -79,10 +84,14 @@ public class ShootingGun : MonoBehaviour {
                     if (Physics.Raycast(MiddleScreen.transform.position, MiddleScreen.transform.TransformDirection(Vector3.forward), out hit, max_distance, layerMask)) {
                         Debug.DrawRay(MiddleScreen.transform.position, MiddleScreen.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                         print("hit");
+                        controllers.Rumble(1,1,0);
+                        recoil.AddRecoil(30,5f,5f);
                         //TODO: health code here
                     } else {
                         Debug.DrawRay(MiddleScreen.transform.position, MiddleScreen.transform.TransformDirection(Vector3.forward) * hit.distance, Color.gray);
                         print("miss");
+                        controllers.Rumble(1,0,1);
+                        recoil.AddRecoil(30,5f,5f);
                     }
                 }
             }

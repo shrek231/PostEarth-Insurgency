@@ -15,10 +15,10 @@ public class InventoryDisplay : MonoBehaviour {
     public Sprite ID3;
     public Sprite ID4;
     void Update() {
-        UpdateInv();//update the inv display
         if (InvCount==4) { //split between multiple frames for performance
             InvCount = 0;
         }
+        UpdateInv();//update the inv display
         if (InvScript.InvArr[InvCount, 0] == 1) {
             if (SlotBuffer[InvCount] != 1) {//wait untill thares a change to update for performance
                 SlotBuffer[0] = 0;
@@ -58,14 +58,14 @@ public class InventoryDisplay : MonoBehaviour {
                         }
                     }
                 }
-                UpdateInv();
+                //UpdateInv();
             }
         }
         InvCount++;
     }
     public void UpdateInv() {
         Sprite SelectedId = Empty;
-        switch (InvScript.InvArr[CurrentSlot,1]) {//TODO: add more cases for more items
+        switch (InvScript.InvArr[InvCount,1]) {//TODO: add more cases for more items
             case (0):{
                 SelectedId = Empty;
                 break;
@@ -82,7 +82,7 @@ public class InventoryDisplay : MonoBehaviour {
                 SelectedId = ID4;
                 break;
             }
-        } switch (CurrentSlot) {
+        } switch (InvCount) {
             case (0): {
                 slot1.GetComponent<Image>().sprite = SelectedId;
                 break;
