@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading;
 public class ShootingGun : MonoBehaviour {
     public GunRecoil recoil = new GunRecoil();
     public Controllers controllers = new Controllers();
@@ -85,13 +86,13 @@ public class ShootingGun : MonoBehaviour {
                         Debug.DrawRay(MiddleScreen.transform.position, MiddleScreen.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                         print("hit");
                         controllers.Rumble(1,1,0);
-                        recoil.AddRecoil(30,5f,5f);
+                        recoil.AddRecoil(30,300);
                         //TODO: health code here
                     } else {
                         Debug.DrawRay(MiddleScreen.transform.position, MiddleScreen.transform.TransformDirection(Vector3.forward) * hit.distance, Color.gray);
                         print("miss");
                         controllers.Rumble(1,0,1);
-                        recoil.AddRecoil(30,5f,5f);
+                        recoil.AddRecoil(30,300);
                     }
                 }
             }
