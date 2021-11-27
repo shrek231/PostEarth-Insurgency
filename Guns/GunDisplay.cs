@@ -5,8 +5,12 @@ public class GunDisplay : MonoBehaviour {
     public ShootingGun GunScript = new ShootingGun();
     public Text amoText;
     void Update() {
-        string mags = (GunScript.ReserveMags - GunScript.CurrentReserveMagsUsed).ToString();
-        string bullets = (GunScript.bulletsPerMag - GunScript.BulletsShot).ToString();
-        amoText.text = GunScript.GunName + "\n" + bullets + "/" + mags;
+        if (GunScript.reload) {
+            amoText.text = GunScript.GunName + "\n" + "...";
+        } else {
+            string mags = (GunScript.ReserveMags - GunScript.CurrentReserveMagsUsed).ToString();
+            string bullets = (GunScript.bulletsPerMag - GunScript.BulletsShot).ToString();
+            amoText.text = GunScript.GunName + "\n" + bullets + "/" + mags;
+        }
     }
 }
