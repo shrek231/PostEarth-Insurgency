@@ -1,11 +1,14 @@
+using System.Diagnostics;
 using UnityEngine;
 using System.Threading;
+using Debug = UnityEngine.Debug;
+
 public class ShootingGun : MonoBehaviour {
     public GunRecoil recoil = new GunRecoil();
     public Controllers controllers = new Controllers();
-    
     public Inventory inventory = new Inventory();
     public InventoryDisplay inventoryDisplay = new InventoryDisplay();
+    
     public float FireActivation = .1f;
     public float TimeBeforeShoot;
     public float TimeBeforeShoot_Bullet;
@@ -41,10 +44,16 @@ public class ShootingGun : MonoBehaviour {
                 loop = 0;
             }
         } if (loop >= 1){
-            if (TimeBeforeShoot >= reloadTime && SBV_28_Mags[1] != ReserveMags) {
-                SBV_28_Mags[1]++;
-                SBV_28_Mags[0] = 0;
+            if (TimeBeforeShoot >= reloadTime && CurrentReserveMagsUsed != ReserveMags) {
+                switch(inventory.InvArr[inventoryDisplay.CurrentSlot,1]){//TODO: add more cases for more guns
+                    case (2): {//SBV-28
+                        SBV_28_Mags[1]++;
+                        SBV_28_Mags[0] = 0;
+                        break;
+                    }
+                }
                 loop = 0;
+                reload = false;
             } else {
                 if (TimeBeforeShoot < 3f) {
                     reload = true;
