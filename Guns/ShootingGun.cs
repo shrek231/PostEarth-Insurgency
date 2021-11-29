@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using System.Threading;
 using Debug = UnityEngine.Debug;
-
+using UnityEngine.Analytics;
 public class ShootingGun : MonoBehaviour {
     public GunRecoil recoil = new GunRecoil();
     public Controllers controllers = new Controllers();
@@ -86,6 +86,9 @@ public class ShootingGun : MonoBehaviour {
             if (TimeBeforeShoot_Bullet >= FireRate){
                 TimeBeforeShoot_Bullet = 0;
                 if (SBV_28_Mags[0] < bulletsPerMag && reload == false){
+                    Analytics.CustomEvent("Shot", new Dictionary<string, object> {
+                        { "Gun", "SBV-28" }
+                    });
                     SBV_28_Mags[0]++;
                     RaycastHit hit;
                     int layerMask = 1 << 8;//This would cast rays only against colliders in layer 8

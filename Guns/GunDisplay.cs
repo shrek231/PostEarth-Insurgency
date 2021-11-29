@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 public class GunDisplay : MonoBehaviour {
