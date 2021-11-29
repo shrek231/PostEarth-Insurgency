@@ -16,7 +16,7 @@ public class ShootingGun : MonoBehaviour {
     public int CurrentSlot;
     public GameObject MiddleScreen;
     public int loop;
-    public bool reload = false;
+    public bool reload;
     
     public float reloadTime;
     public int ReserveMags;
