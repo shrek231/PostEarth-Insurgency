@@ -85,8 +85,7 @@ public class ShootingGun : MonoBehaviour {
         } else {
             if (TimeBeforeShoot_Bullet >= FireRate){
                 TimeBeforeShoot_Bullet = 0;
-                if (SBV_28_Mags[0] < bulletsPerMag){
-                    //TODO: make the MiddleScreen have recoil
+                if (SBV_28_Mags[0] < bulletsPerMag && reload == false){
                     SBV_28_Mags[0]++;
                     RaycastHit hit;
                     int layerMask = 1 << 8;//This would cast rays only against colliders in layer 8
