@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class GunDisplay : MonoBehaviour {
@@ -16,6 +17,10 @@ public class GunDisplay : MonoBehaviour {
     public GameObject Empty;
     private GameObject SpawnedHands;
     private Animator anim;
+    void Start() {
+        Spawned = Empty;
+        Spawned.name = "none";
+    }
     void Update() {
         if (GunScript.reload) {
             count++;
@@ -46,8 +51,8 @@ public class GunDisplay : MonoBehaviour {
 
         switch (inv.InvArr[invDisp.CurrentSlot, 1]) {//TODO: add more cases for more Guns
             case(2): {
-                if (Spawned.name != "id_2"){
-                    Destroy(Spawned);
+                if (Spawned.name != "id_2"){ //null
+                    if(Spawned != null && Spawned.name != "none"){Destroy(Spawned);}
                     Spawned = Instantiate(SBV_28, GunHolder);
                     Spawned.name = "id_2";
                     Spawned.transform.localPosition = new Vector3(0,-.2f,0);
@@ -60,9 +65,13 @@ public class GunDisplay : MonoBehaviour {
                 break;
             }
             default: {
-                Destroy(Spawned);
-                Spawned = Empty;
-                Spawned.name = "none";
+                if (Spawned.name != "none") {
+                    try {
+                        if(Spawned != null){Destroy(Spawned);}
+                    } catch (UnityException e){ print(e); }
+                    Spawned = Empty;
+                    Spawned.name = "none"; //null
+                }
                 break;
             }
         }
